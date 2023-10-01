@@ -1,17 +1,31 @@
-import { FC, PropsWithChildren } from "react";
+import {
+  FC,
+  ForwardRefRenderFunction,
+  PropsWithChildren,
+  Ref,
+  forwardRef,
+} from "react";
 
 interface Props {
   className?: string;
+  id?: string;
 }
 
-const Section: FC<PropsWithChildren<Props>> = (props) => {
-  const { className = "", children } = props;
+const Section: ForwardRefRenderFunction<
+  HTMLElement,
+  PropsWithChildren<Props>
+> = (props, ref) => {
+  const { className = "", children, id } = props;
 
   return (
-    <section className={`w-screen min-h-screen px-3 ${className}`}>
+    <section
+      id={id}
+      className={`w-full min-h-screen scroll-mt-60 ${className}`}
+      ref={ref}
+    >
       {children}
     </section>
   );
 };
 
-export default Section;
+export default forwardRef(Section);
